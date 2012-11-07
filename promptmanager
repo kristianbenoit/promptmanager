@@ -1,0 +1,135 @@
+# Define colors 
+rst=`tput sgr0`
+bla=`tput sgr0 ; tput setaf 0`
+red=`tput sgr0 ; tput setaf 1`
+gre=`tput sgr0 ; tput setaf 2`
+yel=`tput sgr0 ; tput setaf 3`
+blu=`tput sgr0 ; tput setaf 4`
+mag=`tput sgr0 ; tput setaf 5`
+cya=`tput sgr0 ; tput setaf 6`
+whi=`tput sgr0 ; tput setaf 7`
+BLA=`tput sgr0 ; tput bold ; tput setaf 0`
+RED=`tput sgr0 ; tput bold ; tput setaf 1`
+GRE=`tput sgr0 ; tput bold ; tput setaf 2`
+YEL=`tput sgr0 ; tput bold ; tput setaf 3`
+BLU=`tput sgr0 ; tput bold ; tput setaf 4`
+MAG=`tput sgr0 ; tput bold ; tput setaf 5`
+CYA=`tput sgr0 ; tput bold ; tput setaf 6`
+WHI=`tput sgr0 ; tput bold ; tput setaf 7`
+
+function __Bash_Has_Hash_Table {
+    if [ "$BASH_VERSINFO" -ge 4 ]
+    then
+        return 0
+    fi
+    return 1
+}
+
+function __PS1_Render_Dynamic_Content {
+    for i in $(seq 0 $((${#__PS1_LISTOFELEMENTS_L2[*]}-1)))
+    do
+        str=${__PS1_LISTOFELEMENTS_L2[$i]}
+        if [ "$str" == "__ENDLINE__" ]
+        then
+            PS1=$PS1'\n'
+        else
+            PS1=$PS1`PS1_Format_Widget "$str"`
+        fi
+    done
+}
+
+function PS1_Render {
+    _PS1_PS2=`eval echo $PS1_PS2`
+    unset PS1
+    for i in $(seq 0 $((${#__PS1_LISTOFELEMENTS[*]}-1)))
+    do
+        str=${__PS1_LISTOFELEMENTS[$i]}
+        if [ "$str" == "__ENDLINE__" ]
+        then
+            PS1=$PS1'\n'
+        elif [ "$str" == "__DYNAMIC_CONTENT__" ]
+        then
+            __PS1_Render_Dynamic_Content
+        else
+            PS1=$PS1`PS1_Format_Widget "$str"`
+        fi
+    done
+    
+    PS1=$PS1"\[$PS1_COLOR_PROMPT\]\\$\[$rst\] "
+    PS2=$_PS1_PS2
+    unset _PS1_PS2
+}
+
+function PS1_Theme {
+    __PS1_Theme_$1
+    if [ $EUID == 0 ]
+    then
+        PS1_COLOR_USER=$PS1_COLOR_ROOT
+    fi
+    PS1_Render
+}
+
+function PS1_Push_NewLine {
+    PS1_Push_Widget '__ENDLINE__'
+}
+
+function PS1_Push_Dynamic_Content {
+    PS1_Push_Widget '__DYNAMIC_CONTENT__'
+}
+
+function PS1_Push_Widget {
+    __PS1_LISTOFELEMENTS+=("$@")
+}
+
+function PS1_Pop_Widget {
+    [ ${#__PS1_LISTOFELEMENTS[@]} -ge 0 ] || return 1
+    unset __PS1_LISTOFELEMENTS[${#__PS1_LISTOFELEMENTS[@]}-1]
+}
+
+function PS1_Push_Element {
+    key=$1
+    shift
+    __PS1_LISTOFELEMENTS_L2+=("$@")
+    if __Bash_Has_Hash_Table
+    then
+        __PS1_DYNAMICELEMENTS[$key]=$((${#__PS1_LISTOFELEMENTS_L2[*]}-1))
+    fi
+    PS1_Render
+}
+
+function PS1_Pop_Element {
+    [ ${#__PS1_LISTOFELEMENTS_L2[*]} -ge 0 ] || return 1
+    if __Bash_Has_Hash_Table
+    then
+        indice=${__PS1_DYNAMICELEMENTS[$1]}
+        unset __PS1_DYNAMICELEMENTS[$1]
+    else
+        indice=$((${#__PS1_LISTOFELEMENTS_L2[*]}-1))
+    fi
+    unset __PS1_LISTOFELEMENTS_L2[$indice]
+    PS1_Render
+}
+
+function PS1_Clear {
+    unset __PS1_DYNAMICELEMENTS
+    if __Bash_Has_Hash_Table
+    then
+        declare -A __PS1_DYNAMICELEMENTS
+    fi
+    __PS1_LISTOFELEMENTS=()
+    __PS1_LISTOFELEMENTS_L2=()
+    unset PS1_PS2
+    PS1_COLOR_PROMPT=$rst
+}
+
+PS1_Clear
+
+if [ -f /etc/promptrc ]
+then
+    source /etc/promptrc
+fi
+
+if [ -f $HOME/.promptrc ]
+then 
+   source $HOME/.promptrc 
+fi 

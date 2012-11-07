@@ -1,0 +1,148 @@
+# Colors are defined like so in promptmanager
+#rst=`tput sgr0`
+#bla=`tput sgr0 ; tput setaf 0`
+#red=`tput sgr0 ; tput setaf 1`
+#gre=`tput sgr0 ; tput setaf 2`
+#yel=`tput sgr0 ; tput setaf 3`
+#blu=`tput sgr0 ; tput setaf 4`
+#mag=`tput sgr0 ; tput setaf 5`
+#cya=`tput sgr0 ; tput setaf 6`
+#whi=`tput sgr0 ; tput setaf 7`
+#BLA=`tput sgr0 ; tput bold ; tput setaf 0`
+#RED=`tput sgr0 ; tput bold ; tput setaf 1`
+#GRE=`tput sgr0 ; tput bold ; tput setaf 2`
+#YEL=`tput sgr0 ; tput bold ; tput setaf 3`
+#BLU=`tput sgr0 ; tput bold ; tput setaf 4`
+#MAG=`tput sgr0 ; tput bold ; tput setaf 5`
+#CYA=`tput sgr0 ; tput bold ; tput setaf 6`
+#WHI=`tput sgr0 ; tput bold ; tput setaf 7`
+
+# prompt manager uses this variable for the prompt prompt
+#PS1_COLOR_PROMPT=$rst
+
+# Themes are completely optional, but nice to have.
+
+function __PS1_Theme_Kristian {
+    PS1_COLOR_BRACKET=$WHI
+    PS1_COLOR_LOW=$BLA
+    PS1_COLOR_MEDIUM=$BLU
+    PS1_COLOR_HIGH=$yel
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="["
+    PS1_BRACKET_CLOSE="]"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_Hulk {
+    PS1_COLOR_BRACKET=$GRE
+    PS1_COLOR_LOW=$gre
+    PS1_COLOR_MEDIUM=$BLU
+    PS1_COLOR_HIGH=$red
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="{"
+    PS1_BRACKET_CLOSE="}"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_Bunny {
+    PS1_COLOR_BRACKET=$GRE
+    PS1_COLOR_LOW=$gre
+    PS1_COLOR_MEDIUM=$BLU
+    PS1_COLOR_HIGH=$red
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="{"
+    PS1_BRACKET_CLOSE="}"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_Princess {
+    PS1_COLOR_BRACKET=$MAG
+    PS1_COLOR_LOW=$mag
+    PS1_COLOR_MEDIUM=$yel
+    PS1_COLOR_HIGH=$red
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="["
+    PS1_BRACKET_CLOSE="]"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_Tux {
+    PS1_COLOR_BRACKET=$BLA
+    PS1_COLOR_LOW=$WHI
+    PS1_COLOR_MEDIUM=$yel
+    PS1_COLOR_HIGH=$YEL
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="<"
+    PS1_BRACKET_CLOSE=">"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_BnW {
+    PS1_COLOR_BRACKET=$whi
+    PS1_COLOR_LOW=$bla
+    PS1_COLOR_MEDIUM=$BLA
+    PS1_COLOR_HIGH=$WHI
+    PS1_COLOR_ROOT=$RED
+    PS1_COLOR_USER=$PS1_COLOR_LOW
+    PS1_COLOR_HOST=$PS1_COLOR_LOW
+    PS1_COLOR_PROMPT=$PS1_COLOR_HIGH
+    PS1_BRACKET_OPEN="["
+    PS1_BRACKET_CLOSE="]"
+    function PS1_Format_Widget {
+        echo "\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_OPEN\[$PS1_COLOR_HIGH\]$1\[$PS1_COLOR_BRACKET\]$PS1_BRACKET_CLOSE"
+    }
+}
+
+function __PS1_Theme_Plain {
+    unset PS1_COLOR_BRACKET
+    unset PS1_COLOR_LOW
+    unset PS1_COLOR_MEDIUM
+    unset PS1_COLOR_HIGH
+    unset PS1_COLOR_USER
+    unset PS1_COLOR_HOST
+    unset PS1_COLOR_ROOT
+    unset PS1_COLOR_PROMPT
+    PS1_BRACKET_OPEN="("
+    PS1_BRACKET_CLOSE=")"
+    function PS1_Format_Widget {
+        echo "$PS1_BRACKET_OPEN$1$PS1_BRACKET_CLOSE"
+    }
+}
+
+# Set a default prompt
+PS1_Push_Widget '\[$PS1_COLOR_LOW\]\d (\[$PS1_COLOR_MEDIUM\]\@\[$PS1_COLOR_LOW\]) on tty\l'
+PS1_Push_Widget '\[$PS1_COLOR_HIGH\]$?\[$PS1_COLOR_BRACKET\]|\[$PS1_COLOR_HIGH\]\j\[$PS1_COLOR_LOW\]zZ'
+PS1_Push_Dynamic_Content
+PS1_Push_NewLine
+PS1_Push_Widget '\[$PS1_COLOR_USER\]\u\[$PS1_COLOR_BRACKET\]@\[$PS1_COLOR_HOST\]\h \[$PS1_COLOR_MEDIUM\]\W'
+
+# Also for PS2
+PS1_PS2='"\[$PS1_COLOR_BRACKET\][\[$PS1_COLOR_LOW\]*\[$PS1_COLOR_BRACKET\]>\[$rst\] "'
+
+# Set the theme, the prompt will be rendered.
+PS1_Theme Kristian
