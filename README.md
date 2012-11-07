@@ -4,15 +4,15 @@ promptmanager
 A bash prompt manager with themes, colors and dynamic elements like python
 virtualenv.
 
-TRY
-===
+Try
+---
 
 To try, from bash, you can source like so:
 $ source promptmanager
 $ source promptrc
 
-INSTALL
-=======
+Install
+-------
 
 To install, copy promptmanager and promptrc to /etc and userpromptrc to
 "/etc/skel/".
@@ -32,11 +32,10 @@ $ cp userpromptrc $HOME/.promptrc
 Now you need to source /etc/promptmanager from /etc/profile and that depends on
 you distribution.
 
-CONFIGURE
-=========
+Configure
+---------
 
-Set a default prompt
---------------------
+### Set a default prompt ###
 
 ```bash
 PS1_Clear
@@ -47,14 +46,14 @@ PS1_Push_NewLine
 PS1_Push_Widget '\[$PS1_COLOR_USER\]\u\[$PS1_COLOR_BRACKET\]@\[$PS1_COLOR_HOST\]\h \[$PS1_COLOR_MEDIUM\]\W'
 ```
 
-Also set a PS2
---------------
+### Also set a PS2 ###
+
 ```bash
 PS1_PS2='"\[$PS1_COLOR_BRACKET\][\[$PS1_COLOR_LOW\]*\[$PS1_COLOR_BRACKET\]>\[$rst\] "'
 ```
 
-Then choose a theme or Render with the default theme.
------------------------------------------------------
+### Then choose a theme or Render ###
+
 ```bash
 PS1_Theme Kristian
 PS1_Theme Hulk
