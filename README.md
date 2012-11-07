@@ -18,7 +18,7 @@ Suppose your have such prompt :
 [username@hostname:~]$
 ```
 
-Then you activate a python virtualenv named pydev, you prompt look like so
+Then you activate a python virtualenv named pydev, your prompt look like so
 without color to (pydev) :
 
 ```bash
