@@ -134,6 +134,8 @@ function __PS1_Theme_Plain {
     }
 }
 
+PS1_Clear
+
 # Set a default prompt
 PS1_Push_Widget '\[$PS1_COLOR_LOW\]\d (\[$PS1_COLOR_MEDIUM\]\@\[$PS1_COLOR_LOW\]) on tty\l'
 PS1_Push_Widget '\[$PS1_COLOR_HIGH\]$?\[$PS1_COLOR_BRACKET\]|\[$PS1_COLOR_HIGH\]\j\[$PS1_COLOR_LOW\]zZ'

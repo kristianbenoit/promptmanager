@@ -26,16 +26,20 @@ function __Bash_Has_Hash_Table {
 }
 
 function __PS1_Render_Dynamic_Content {
-    for i in $(seq 0 $((${#__PS1_LISTOFELEMENTS_L2[*]}-1)))
-    do
-        str=${__PS1_LISTOFELEMENTS_L2[$i]}
-        if [ "$str" == "__ENDLINE__" ]
-        then
-            PS1=$PS1'\n'
-        else
-            PS1=$PS1`PS1_Format_Widget "$str"`
-        fi
-    done
+    last_idx=$((${#__PS1_LISTOFELEMENTS_L2[*]}-1))
+    if [ "$last_idx" -ge "0" ]
+    then
+        for i in $(seq 0 $last_idx)
+        do
+            str=${__PS1_LISTOFELEMENTS_L2[$i]}
+            if [ "$str" == "__ENDLINE__" ]
+            then
+                PS1=$PS1'\n'
+            else
+                PS1=$PS1`PS1_Format_Widget "$str"`
+            fi
+        done
+    fi
 }
 
 function PS1_Render {
@@ -121,8 +125,6 @@ function PS1_Clear {
     unset PS1_PS2
     PS1_COLOR_PROMPT=$rst
 }
-
-PS1_Clear
 
 if [ -f /etc/promptrc ]
 then
