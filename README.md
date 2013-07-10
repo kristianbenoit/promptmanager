@@ -64,7 +64,7 @@ source promptrc
 Add a DEBUG element to your prompt :
 
 ```bash
-PS1_Pop_Element debug DEBUG
+PS1_Push_Element debug DEBUG
 ```
 
 Change your theme :
