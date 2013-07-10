@@ -29,7 +29,13 @@ function __PS1_Render_Dynamic_Content {
     last_idx=$((${#__PS1_LISTOFELEMENTS_L2[*]}-1))
     if [ "$last_idx" -ge "0" ]
     then
-        for i in $(seq 0 $last_idx)
+        list_elem=$(seq 0 $last_idx)
+        if __Bash_Has_Hash_Table
+        then
+            list_elem=${__PS1_DYNAMICELEMENTS[@]}
+        fi
+
+        for i in $list_elem
         do
             str=${__PS1_LISTOFELEMENTS_L2[$i]}
             if [ "$str" == "__ENDLINE__" ]
@@ -110,7 +116,9 @@ function PS1_Pop_Element {
     else
         indice=$((${#__PS1_LISTOFELEMENTS_L2[*]}-1))
     fi
-    unset __PS1_LISTOFELEMENTS_L2[$indice]
+    if [ ! -z "$indice" ] ; then
+        unset __PS1_LISTOFELEMENTS_L2[$indice]
+    fi
     PS1_Render
 }
 
@@ -118,7 +126,7 @@ function PS1_Clear {
     unset __PS1_DYNAMICELEMENTS
     if __Bash_Has_Hash_Table
     then
-        declare -A __PS1_DYNAMICELEMENTS
+        declare -Ag __PS1_DYNAMICELEMENTS
     fi
     __PS1_LISTOFELEMENTS=()
     __PS1_LISTOFELEMENTS_L2=()
