@@ -7,6 +7,11 @@ debug mode or python virtualenv. Usually, these just add element to your PS1,
 no colors, no question where to add it. That's where the prompt manager is
 useful.
 
+Screenshot
+==========
+
+https://dl.dropboxusercontent.com/u/39729597/Capture%20d%E2%80%99%C3%A9cran%202015-03-10%20%C3%A0%2013.18.41.png
+
 Example use
 -----------
 
