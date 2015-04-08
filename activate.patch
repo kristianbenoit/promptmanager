@@ -1,0 +1,25 @@
+--- activate.bak	2013-07-10 09:26:45.886754979 -0400
++++ activate	2013-07-11 11:24:49.174699079 -0400
+@@ -22,8 +22,11 @@ deactivate () {
+     if [ -n "$BASH" -o -n "$ZSH_VERSION" ] ; then
+         hash -r 2>/dev/null
+     fi
+
+-    if [ -n "$_OLD_VIRTUAL_PS1" ] ; then
++    if `declare -f PS1_Pop_Element 2>&1 > /dev/null` ; then
++        ENV_NAME=`basename "$VIRTUAL_ENV"`
++        PS1_Pop_Element VIRTUAL_ENV_$ENV_NAME
++    elif [ -n "$_OLD_VIRTUAL_PS1" ] ; then
+         PS1="$_OLD_VIRTUAL_PS1"
+         export PS1
+         unset _OLD_VIRTUAL_PS1
+@@ -58,6 +61,9 @@ if [ -z "$VIRTUAL_ENV_DISABLE_PROMPT" ]
+     _OLD_VIRTUAL_PS1="$PS1"
+     if [ "x" != x ] ; then
+         PS1="$PS1"
++    elif `declare -f PS1_Push_Element 2>&1 > /dev/null` ; then
++        ENV_NAME=`basename "$VIRTUAL_ENV"`
++        PS1_Push_Element VIRTUAL_ENV_$ENV_NAME $ENV_NAME 
+     else
+     if [ "`basename \"$VIRTUAL_ENV\"`" = "__" ] ; then
+         # special case for Aspen magic directories
