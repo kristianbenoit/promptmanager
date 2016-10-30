@@ -95,7 +95,7 @@ function __PS1_Set_Title {
     echo -ne "\e];$1\a"
 }
 
-function __PS1_Theme_Complete_()
+function _PS1_Theme_Complete_()
 {
     local cur prev opts
     cur=${COMP_WORDS[COMP_CWORD]}
@@ -104,7 +104,7 @@ function __PS1_Theme_Complete_()
     COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
 }
 
-complete -F __PS1_Theme_Complete_ PS1_Theme
+complete -F _PS1_Theme_Complete_ PS1_Theme
 
 function PS1_Push_NewLine {
     PS1_Push_Widget '__ENDLINE__'
