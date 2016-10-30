@@ -71,13 +71,40 @@ function PS1_Render {
 }
 
 function PS1_Theme {
+    if [ $# == 0 ]; then
+        echo declare -F | sed -ne 's/.*__PS1_Theme_//p'
+        return 1
+    fi
     __PS1_Theme_$1
-    if [ $EUID == 0 ]
-    then
+    if [ $EUID == 0 ]; then
         PS1_COLOR_USER=$PS1_COLOR_ROOT
     fi
     PS1_Render
+
+    # guessing gnome-terminal, setting the title
+    if [ $TERM == "xterm-256color" ]; then
+        if [ $# == 1 ] ; then
+            __PS1_Set_Title "$1"
+        else
+            __PS1_Set_Title "$2"
+        fi
+    fi
 }
+
+function __PS1_Set_Title {
+    echo -ne "\e];$1\a"
+}
+
+function __PS1_Theme_Complete_()
+{
+    local cur prev opts
+    cur=${COMP_WORDS[COMP_CWORD]}
+    opts=`declare -F | sed -ne 's/.*__PS1_Theme_//p'`
+
+    COMPREPLY=($(compgen -W "${opts}" -- "${cur}"))
+}
+
+complete -F __PS1_Theme_Complete_ PS1_Theme
 
 function PS1_Push_NewLine {
     PS1_Push_Widget '__ENDLINE__'
