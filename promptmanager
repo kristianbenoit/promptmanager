@@ -70,6 +70,7 @@ function PS1_Render {
     unset _PS1_PS2
 }
 
+gnome_terminal=true
 function PS1_Theme {
     if [ $# == 0 ]; then
         echo declare -F | sed -ne 's/.*__PS1_Theme_//p'
@@ -81,8 +82,8 @@ function PS1_Theme {
     fi
     PS1_Render
 
-    # guessing gnome-terminal, setting the title
-    if [ $TERM == "xterm-256color" ]; then
+    # Setting the title for gnome terminal.
+    if $gnome_terminal && [ $TERM == "xterm-256color" ]; then
         if [ $# == 1 ] ; then
             __PS1_Set_Title "$1"
         else

@@ -109,6 +109,23 @@ else
 fi
 ```
 
+gnome
+-----
+In gnome terminal, each terminal has a title.
+
+![screenshot](https://dl.dropboxusercontent.com/u/39729597/gnome-theme.png)
+
+By default it sets the title to the current theme name. You can also set it yourself:
+
+```bash
+PS1_Theme Bunny "Use this terminal for work"
+```
+
+It does not seam easy to detect that you are using gnome-terminal. So if it annoy you, you can tell that you are not using it:
+
+```bash
+gnome_terminal=false PS1_Theme BnW
+```
 
 Configure
 ---------

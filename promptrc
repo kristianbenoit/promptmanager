@@ -22,6 +22,10 @@
 
 # Themes are completely optional, but nice to have.
 
+# Set to false if you dont use gnome-terminal, and there is an error message
+# when you open a prompt. This set allow to set the prompt title.
+#gnome_terminal=false
+
 function __PS1_Theme_Kristian {
     PS1_COLOR_BRACKET=$WHI
     PS1_COLOR_LOW=$BLA
@@ -147,4 +151,4 @@ PS1_Push_Widget '\[$PS1_COLOR_USER\]\u\[$PS1_COLOR_BRACKET\]@\[$PS1_COLOR_HOST\]
 PS1_PS2='"\[$PS1_COLOR_BRACKET\][\[$PS1_COLOR_LOW\]*\[$PS1_COLOR_BRACKET\]>\[$rst\] "'
 
 # Set the theme, the prompt will be rendered.
-PS1_Theme Kristian
+PS1_Theme Kristian "Use PS1_Theme <theme name> <title>, to define this terminal use (e.g. work)"
