@@ -10,7 +10,7 @@ useful.
 Screenshot
 ==========
 
-![screenshot](https://dl.dropboxusercontent.com/u/39729597/Capture%20d%E2%80%99%C3%A9cran%202015-03-10%20%C3%A0%2013.18.41.png)
+![screenshot](Screenshot.png)
 
 Example use
 -----------
