@@ -200,7 +200,7 @@ To install, copy promptmanager and promptrc to /etc and userpromptrc to
 
 ```bash
 sudo cp promptmanager promptrc /etc/
-sudo cp userpromptrc /etc/skel/.skel
+sudo cp userpromptrc /etc/skel/.promptrc
 ```
 
 Instead of having it's own file in the skel, you add userpromptrc to
