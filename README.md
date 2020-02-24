@@ -195,20 +195,19 @@ This can be done globally in /etc/promptrc or per user in $HOME/.promptrc
 Install
 -------
 
-To install, copy promptmanager and promptrc to /etc and userpromptrc to
-"/etc/skel/".
+To install, copy promptmanager and promptrc to /etc and userpromptrc to "/etc/skel/".
 
+Install system wide for new users.
 ```bash
 sudo cp promptmanager promptrc /etc/
 sudo cp userpromptrc /etc/skel/.promptrc
 ```
 
-Instead of having it's own file in the skel, you add userpromptrc to
-"/etc/skel/.bashrc".
+* Instead of having it's own file in the skel, you add userpromptrc to "/etc/skel/.bashrc".
 
-```bash
-sudo bash -c 'cat userpromptrc >> /etc/skel/.bashrc'
-```
+  ```bash
+  sudo bash -c 'cat userpromptrc >> /etc/skel/.bashrc'
+  ```
  
 You can also copy it to $HOME/.promptrc.
 
@@ -217,4 +216,4 @@ cp userpromptrc $HOME/.promptrc
 ```
 
 Now you need to source /etc/promptmanager from /etc/profile and that depends on
-you distribution, but look at where it sets PS1 and replace that.
+your distribution, but look at where it sets PS1 and replace that.
