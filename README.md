@@ -113,7 +113,7 @@ gnome
 -----
 In gnome terminal, each terminal has a title.
 
-![screenshot](https://dl.dropboxusercontent.com/u/39729597/gnome-theme.png)
+![screenshot](gnome_terminal_title.png)
 
 By default it sets the title to the current theme name. You can also set it yourself:
 
